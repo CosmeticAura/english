@@ -10,7 +10,7 @@ COURSE = {
  "name": "Representations of Social Conflict, 10th grade",
  "eyebrow": "The Clinton School, 2026 to 2027",
  "intro": "Study loops for the quiz on \"Interpreter of Maladies\" by Jhumpa Lahiri: the characters, what happens, the symbols, the themes and the quotes to know.",
- "img": "img", "breakMinutes": 5, "dumpMinutes": 7,
+ "img": "img", "breakMinutes": 2.5, "dumpMinutes": 7,
  "extras": [{"eyebrow": "Quiz Mon, Nov 2", "title": "Written practice", "text": "Pick 2 likely questions, answer them on the clock, then check each answer and compare with a model outline.", "href": "practice/"}],
  "units": [{"label": "Story", "name": "Interpreter of Maladies", "title": "Interpreter of Maladies",
    "chip": "Quiz Mon, Nov 2",

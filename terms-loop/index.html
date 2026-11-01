@@ -325,7 +325,7 @@ const DECK = {
  "title": "English: plot and terms",
  "subtitle": "Quiz Mon, Nov 2",
  "source": "The plot stages, the terms people mix up most and how to write a full answer. Take the diagnostic first to see where you are.",
- "breakMinutes": 5,
+ "breakMinutes": 2.5,
  "dumpMinutes": 7,
  "sections": [
   {
@@ -747,7 +747,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const rich=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
 const secs=DECK.sections;
-let S=load();
+let S=load();if(!S.settings.b25){S.settings.breakMin=2.5;S.settings.b25=1;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 let tick=null,raf=0;
 
 function blank(){return {cur:null,sec:{},settings:{breakMin:DECK.breakMinutes||5,dumpMin:DECK.dumpMinutes||7,sound:true}}}
@@ -848,7 +848,7 @@ function overview(){
   return '<div class="head"><div class="txt"><span class="eyebrow num">'+done+" of "+secs.length+' sections done</span><h2>'+esc(DECK.title)+"</h2>"+(DECK.source?'<span class="small">'+esc(DECK.source)+"</span>":"")+"</div></div>"+
   '<section class="panel"><h3>How each section works</h3><ol class="how"><li>Read the notes for the section.</li><li>Take a brain break.</li><li>Do the flashcards, once or twice.</li><li>Take another brain break.</li><li>Brain dump: write everything you remember with the notes closed.</li><li>Mark what you missed, then loop on it or move to the next section.</li></ol>'+
   '<div class="actions">'+(nextSec?'<button class="btn primary" data-go="'+esc(nextSec.id)+'">'+(statusOf(nextSec.id)==="new"?"Start ":"Continue ")+(idx(nextSec.id)+1)+". "+esc(nextSec.title)+"</button>":'<span class="muted">Every section is done. Loop any one again to keep it fresh.</span>')+"</div>"+
-  '<div class="settings"><label>Breaks <select id="bk">'+[3,5,7,10].map(v=>'<option value="'+v+'"'+(S.settings.breakMin===v?" selected":"")+">"+v+" min</option>").join("")+'</select></label><label>Brain dump goal <select id="dm">'+[5,7,10].map(v=>'<option value="'+v+'"'+(S.settings.dumpMin===v?" selected":"")+">"+v+" min</option>").join("")+'</select></label><label><input type="checkbox" id="snd"'+(S.settings.sound?" checked":"")+"> Chime when a break ends</label></div></section>"+
+  '<div class="settings"><label>Breaks <select id="bk">'+[2.5,3,5,7,10].map(v=>'<option value="'+v+'"'+(S.settings.breakMin===v?" selected":"")+">"+(v===2.5?"2 min 30 s":v+" min")+"</option>").join("")+'</select></label><label>Brain dump goal <select id="dm">'+[5,7,10].map(v=>'<option value="'+v+'"'+(S.settings.dumpMin===v?" selected":"")+">"+v+" min</option>").join("")+'</select></label><label><input type="checkbox" id="snd"'+(S.settings.sound?" checked":"")+"> Chime when a break ends</label></div></section>"+
   '<section class="panel"><h3>Sections</h3><ul class="rows">'+rows+'</ul><div class="actions"><span class="grow"></span><button class="btn quiet" id="reset">Reset progress</button></div><div id="confirm"></div></section>';
 }
 function bindOverview(){
@@ -862,7 +862,7 @@ function bindOverview(){
 /* Step 1: read */
 function stepRead(sec,s){
   const focus=s.round>1&&s.focus.length?'<div class="focus"><b>Round '+s.round+": focus on what you missed</b><ul>"+s.focus.map(k=>"<li>"+rich(sec.points[k])+"</li>").join("")+"</ul></div>":"";
-  return '<section class="panel">'+focus+'<div class="notes">'+notesHTML(sec.notes)+'</div><div class="actions"><button class="btn primary" id="go">Done reading <kbd>Enter</kbd></button><span class="small">Next: a '+S.settings.breakMin+" minute brain break</span></div></section>";
+  return '<section class="panel">'+focus+'<div class="notes">'+notesHTML(sec.notes)+'</div><div class="actions"><button class="btn primary" id="go">Done reading <kbd>Enter</kbd></button><span class="small">Next: a '+(S.settings.breakMin===2.5?"2 min 30 s":S.settings.breakMin+" minute")+" brain break</span></div></section>";
 }
 
 /* Steps 2 and 4: break */
