@@ -278,6 +278,34 @@ textarea.dump:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,122,2
 .pt[aria-pressed="true"] .box{background:var(--success);border-color:var(--success)}
 .pt[aria-pressed="true"] .box::after{border-color:#fff}
 .settings select{border:0;background:var(--fill)}
+
+/* Quizlet style swipe cues */
+.card{touch-action:pan-y;transition:transform .2s ease-out,box-shadow .2s,background .2s;will-change:transform}
+.card.drag{transition:none}
+.card .stamp{position:absolute;top:14px;font-size:14px;font-weight:700;padding:5px 14px;border-radius:999px;opacity:0;transition:opacity .15s;pointer-events:none}
+.card .stamp.ok{right:16px;color:#1f8a3b;background:rgba(52,199,89,.16);border:2px solid #34c759;transform:rotate(8deg)}
+.card .stamp.no{left:16px;color:#d70015;background:rgba(255,59,48,.12);border:2px solid #ff3b30;transform:rotate(-8deg)}
+.card.tint-ok{background:#effbf2;box-shadow:0 0 0 3px #34c759,0 8px 24px rgba(52,199,89,.25)}
+.card.tint-no{background:#fff1f0;box-shadow:0 0 0 3px #ff3b30,0 8px 24px rgba(255,59,48,.22)}
+.card.tint-ok .stamp.ok,.card.tint-no .stamp.no{opacity:1}
+.card.tint-ok .side-l,.card.tint-no .side-l{opacity:0}
+.card.fly-ok{animation:flyR .34s cubic-bezier(.4,0,.6,1) forwards}
+.card.fly-no{animation:flyL .34s cubic-bezier(.4,0,.6,1) forwards}
+@keyframes flyR{0%{transform:translateX(0) rotate(0)}100%{transform:translateX(120%) rotate(16deg);opacity:0}}
+@keyframes flyL{0%{transform:translateX(0) rotate(0)}100%{transform:translateX(-120%) rotate(-16deg);opacity:0}}
+.card.enter{animation:cardIn .26s cubic-bezier(.2,.9,.3,1)}
+@keyframes cardIn{from{transform:translateY(14px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.card.flipin{animation:flipIn .22s ease-out}
+@keyframes flipIn{from{transform:perspective(900px) rotateX(70deg);opacity:.4}to{transform:none;opacity:1}}
+.panel:has(.card){overflow:hidden}
+.cnt{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 8px;border-radius:999px;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.btn.no .cnt{background:#ff3b30;color:#fff}.btn.ok .cnt{background:#34c759;color:#fff}
+.btn.no,.btn.ok{min-width:150px}
+.btn.no:not([disabled]){background:rgba(255,59,48,.12);color:#d70015}.btn.ok:not([disabled]){background:rgba(52,199,89,.16);color:#1f8a3b}
+.btn.bump{animation:bump .3s ease-out}
+@keyframes bump{40%{transform:scale(1.08)}}
+.swipehint{text-align:center;font-size:13px;color:var(--ink-3);margin-top:-8px}
+@media (prefers-reduced-motion:reduce){.card.fly-ok,.card.fly-no,.card.enter,.card.flipin,.btn.bump{animation:none}}
 </style>
 </head>
 <body>
@@ -856,8 +884,8 @@ function stepCards(sec,s){
   }
   const c=sec.cards[f.order[f.pos]];
   return '<section class="panel"><div class="fcbar num"><span>Pass '+s.passes+'</span><span class="track"><i style="width:'+(100*f.pos/f.order.length)+'%"></i></span><span>'+(f.pos+1)+" / "+f.order.length+'</span></div>'+
-  '<div class="card" id="card" role="button" tabindex="0" aria-label="Flip card"><span class="side-l">'+(f.flip?"Answer":"Term")+'</span>'+(f.flip?'<div><div class="term">'+rich(c[0])+'</div><div class="back">'+rich(c[1])+"</div></div>":'<div class="front">'+rich(c[0])+"</div>")+'<span class="hint">'+(f.flip?"":"Click or press space to flip")+'</span></div>'+
-  '<div class="actions" style="justify-content:center"><button class="btn no" id="miss"'+(f.flip?"":" disabled")+'>Missed <kbd>&larr;</kbd></button><button class="btn ok" id="got"'+(f.flip?"":" disabled")+'>Got it <kbd>&rarr;</kbd></button></div><div class="actions" style="justify-content:center;margin-top:-8px"><button class="btn quiet" id="undo"'+(f.pos?"":" disabled")+'>&#8630; Back to last card <kbd>Ctrl Z</kbd></button></div>'+quiz+"</section>";
+  '<div class="card" id="card" role="button" tabindex="0" aria-label="Flip card"><span class="side-l">'+(f.flip?"Answer":"Term")+'</span>'+(f.flip?'<div><div class="term">'+rich(c[0])+'</div><div class="back">'+rich(c[1])+"</div></div>":'<div class="front">'+rich(c[0])+"</div>")+'<span class="stamp ok">Got it</span><span class="stamp no">Still learning</span><span class="hint">'+(f.flip?"":"Tap or press space to flip")+'</span></div>'+
+  '<div class="actions" style="justify-content:center"><button class="btn no" id="miss"'+(f.flip?"":" disabled")+'><span class="cnt">'+f.missed.length+'</span>Still learning <kbd>&larr;</kbd></button><button class="btn ok" id="got"'+(f.flip?"":" disabled")+'>Got it <kbd>&rarr;</kbd><span class="cnt">'+f.got.length+'</span></button></div><p class="swipehint">Swipe the card right if you got it, left if you are still learning</p><div class="actions" style="justify-content:center;margin-top:-8px"><button class="btn quiet" id="undo"'+(f.pos?"":" disabled")+'>&#8630; Back to last card <kbd>Ctrl Z</kbd></button></div>'+quiz+"</section>";
 }
 
 /* Step 5: brain dump */
@@ -901,10 +929,20 @@ function bindStep(sec,s){
       goBtn.onclick=()=>next(sec,s);
       return;
     }
-    const card=$("#card");
-    const flip=()=>{f.flip=!f.flip;save();render()};
-    card.onclick=flip;
-    const mark=(ok)=>{if(!f.flip)return;const k=f.order[f.pos];(ok?f.got:f.missed).push(k);(f.hist=f.hist||[]).push(ok?1:0);f.pos++;f.flip=false;save();render();const c2=$("#card");if(c2){c2.classList.add(ok?"flash-ok":"flash-no")}};
+    const card=$("#card");let busy=false;
+    const flip=()=>{if(busy)return;f.flip=!f.flip;save();render();const c2=$("#card");if(c2&&!still.matches)c2.classList.add("flipin")};
+    const commit=(ok)=>{const k=f.order[f.pos];(ok?f.got:f.missed).push(k);(f.hist=f.hist||[]).push(ok?1:0);f.pos++;f.flip=false;save();render();const c2=$("#card");if(c2&&!still.matches)c2.classList.add("enter");const b2=$(ok?"#got":"#miss");if(b2&&!still.matches)b2.classList.add("bump")};
+    const mark=(ok,fromDrag)=>{if(busy)return;if(!f.flip&&!fromDrag)return;busy=true;card.classList.remove("drag");card.style.transform="";card.classList.add(ok?"tint-ok":"tint-no");
+      if(still.matches){setTimeout(()=>commit(ok),220);return}
+      card.classList.add(ok?"fly-ok":"fly-no");setTimeout(()=>commit(ok),340)};
+    /* Swipe like Quizlet: drag right for got it (green), left for still learning (red). A tap flips. */
+    let sx=null,dx=0,moved=false;
+    card.onpointerdown=e=>{if(busy)return;sx=e.clientX;dx=0;moved=false;card.setPointerCapture(e.pointerId)};
+    card.onpointermove=e=>{if(sx===null)return;dx=e.clientX-sx;if(Math.abs(dx)>6)moved=true;if(!moved)return;card.classList.add("drag");card.style.transform="translateX("+dx+"px) rotate("+(dx/24)+"deg)";
+      const a=Math.min(1,Math.abs(dx)/120);card.classList.toggle("tint-ok",dx>30);card.classList.toggle("tint-no",dx<-30);card.style.setProperty("--a",a)};
+    const up=()=>{if(sx===null)return;const d=dx;sx=null;if(!moved){flip();return}
+      if(Math.abs(d)>100){mark(d>0,true)}else{card.classList.remove("drag","tint-ok","tint-no");card.style.transform=""}};
+    card.onpointerup=up;card.onpointercancel=up;
     $("#got").onclick=()=>mark(true);$("#miss").onclick=()=>mark(false);
     bindStep.mark=mark;bindStep.flip=flip;
   }
