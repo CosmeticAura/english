@@ -13,3 +13,4 @@ Live site: https://cosmeticaura.github.io/english/
 Progress saves in your browser only. The deck lives in `deck.json`; rebuild with the studynow kit: `python3 build.py course.py OUT`.
 
 - `review/` is the whole quiz in 5 loops, including the class packet questions, with an interactive plot diagram. `diagnostic-2/` is a second self grading check.
+- `packet/` is the answer key for every question in the class packet, pp. 43 to 68.
