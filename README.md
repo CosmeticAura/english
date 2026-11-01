@@ -11,3 +11,5 @@ Live site: https://cosmeticaura.github.io/english/
 - `practice/` lets you pick 2 likely questions, answer them in 20 minutes, check each answer for claim, quote, explanation and link, then compare with a model outline.
 
 Progress saves in your browser only. The deck lives in `deck.json`; rebuild with the studynow kit: `python3 build.py course.py OUT`.
+
+- `review/` is the whole quiz in 3 loops with an interactive plot diagram. `diagnostic-2/` is a second self grading check.

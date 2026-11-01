@@ -691,6 +691,21 @@ const DECK = {
     },
     {
      "p": "**Claim:** Mr. Kapasi's question is the climax because it is the turning point. **Evidence:** He asks, \"Is it really pain you feel, Mrs. Das, or is it guilt?\" and she glares and walks off. **Explain:** Up to here his hope keeps rising, and right here it dies, since he sees he was \"not even important enough to be properly insulted.\" **Link:** Everything after it falls from this moment, and it shows the theme that he never truly understood her, and she never saw him."
+    },
+    {
+     "h": "Quotes to use, and what each one means"
+    },
+    {
+     "p": "**\"But so romantic\"** (Mrs. Das, about his interpreter job). She just finds the job interesting, but he hears it as her being interested in him. This is the inciting incident that starts his crush."
+    },
+    {
+     "p": "**\"Is it really pain you feel, Mrs. Das, or is it guilt?\"** (Mr. Kapasi). He suggests her problem is guilt, not pain. It insults her, she walks off, and his fantasy ends. This is the climax."
+    },
+    {
+     "p": "**\"not even important enough to be properly insulted\"** (Mr. Kapasi, right after). She doesn't care about him enough to even be angry. He realizes he means nothing to her."
+    },
+    {
+     "p": "**\"the picture of the Das family he would preserve forever in his mind\"** (the last line). All he keeps is a memory. There was never a real connection, only the one he imagined."
     }
    ],
    "cards": [
@@ -733,6 +748,18 @@ const DECK = {
     [
      "Quote after the climax",
      "He was \"not even important enough to be properly insulted\""
+    ],
+    [
+     "What \"But so romantic\" means",
+     "She finds his job interesting; he takes it as interest in him"
+    ],
+    [
+     "What \"not even important enough to be properly insulted\" means",
+     "She doesn't care enough to be angry; he means nothing to her"
+    ],
+    [
+     "What the last line means",
+     "All he keeps is a memory; the connection was only in his head"
     ]
    ],
    "points": [
@@ -1023,6 +1050,37 @@ let lastNarrow=matchMedia("(max-width:860px)").matches;
 addEventListener("resize",()=>{const n=matchMedia("(max-width:860px)").matches;if(n!==lastNarrow){lastNarrow=n;renderSide()}});
 document.title=DECK.title;
 render();
+})();
+</script>
+<script>
+/* Interactive plot diagram: replaces the plot picture so the text stays big. Tap a dot or a stage. */
+(function(){
+var ST=[["Exposition","Who, where, when: the normal world before anything happens.","Mr. Kapasi picks up the Das family at Hotel Sandy Villa for the trip to Konarak. Mr. and Mrs. Das bicker like siblings.","b"],
+["Inciting incident","The one event that starts the story moving.","Mrs. Das hears he interprets for a doctor and says \"But so romantic.\" His crush begins.","b"],
+["Rising action","Tension builds up, things get more intense.","He gives her his address, dreams of years of letters, and adds the hills at Udayagiri and Khandagiri to the trip.","b"],
+["Complication","A new problem that makes things harder right before the top.","Mrs. Das confesses that Bobby is not her husband's son.","b"],
+["Climax","The turning point, the moment of highest tension.","He asks, \"Is it really pain you feel, Mrs. Das, or is it guilt?\" She walks off and his fantasy dies.","r"],
+["Reversal","The moment the direction flips.","Her trail of puffed rice draws the monkeys after her, and the story turns to danger.","g"],
+["Falling action","What happens after the climax, as the tension comes down.","The monkeys attack Bobby and Mr. Kapasi drives them off with a branch.","g"],
+["Resolution","The problem gets settled.","They patch Bobby up and head back to the hotel. \"Poor Bobby.\"","g"],
+["Denouement","The very last image, how things end up.","His address slip blows away and only he sees it.","g"]];
+var PT=[[70,330],[210,330],[290,232],[370,134],[450,50],[520,138],[590,226],[680,330],[870,330]];
+var COL={b:"#007aff",r:"#ff3b30",g:"#34c759"},INK={b:"#0a3fae",r:"#c4001a",g:"#127a35"};
+var css=document.createElement('style');css.textContent='.px{display:grid;gap:12px}.px svg{width:100%;height:auto;display:block;background:#fff;border-radius:12px;border:.5px solid rgba(60,60,67,.16)}.px .dot{cursor:pointer}.px .dot circle{transition:r .15s}.px .chips{display:flex;flex-wrap:wrap;gap:6px}.px .chips button{border:0;border-radius:999px;padding:7px 12px;font:600 14px -apple-system,system-ui,sans-serif;background:rgba(118,118,128,.12);color:#000;cursor:pointer}.px .chips button.on{color:#fff}.px .card2{border-radius:14px;padding:16px 18px;background:#fff;border:2px solid #007aff}.px .card2 .n{font:700 24px -apple-system,system-ui,sans-serif;margin:0}.px .card2 .m{font-size:18px;margin:6px 0 0}.px .card2 .s{font-size:16px;color:#3a3a3c;margin:10px 0 0}.px .card2 .s b{color:#000}.px .nav{display:flex;justify-content:space-between}.px .nav button{border:0;background:none;color:#007aff;font:600 16px -apple-system,system-ui,sans-serif;cursor:pointer;padding:6px 0}.px .hint{font-size:13px;color:rgba(60,60,67,.6);margin:0}';document.head.appendChild(css);
+function build(fig){
+ var w=document.createElement('div');w.className='px';
+ var dots=PT.map(function(p,i){return '<g class="dot" data-i="'+i+'"><circle cx="'+p[0]+'" cy="'+p[1]+'" r="24" fill="'+COL[ST[i][3]]+'"/><text x="'+p[0]+'" y="'+(p[1]+8)+'" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">'+(i+1)+'</text></g>'}).join('');
+ w.innerHTML='<p class="hint">Tap a number or a stage to see what it means and where it happens.</p><svg viewBox="0 0 940 380" font-family="-apple-system,system-ui,sans-serif"><polygon points="20,330 210,330 450,50 680,330 920,330 920,340 20,340" fill="#f2f6ff"/><polyline points="20,330 210,330 450,50 680,330 920,330" fill="none" stroke="#1d1d1f" stroke-width="5" stroke-linejoin="round"/>'+dots+'</svg><div class="chips">'+ST.map(function(s,i){return '<button data-i="'+i+'">'+(i+1)+' '+s[0]+'</button>'}).join('')+'</div><div class="card2"></div><div class="nav"><button class="pv">&lsaquo; Previous stage</button><button class="nx">Next stage &rsaquo;</button></div>';
+ var cur=0;
+ function show(i){cur=(i+9)%9;var s=ST[cur];var c=w.querySelector('.card2');c.style.borderColor=COL[s[3]];
+  c.innerHTML='<p class="n" style="color:'+INK[s[3]]+'">'+(cur+1)+'. '+s[0]+'</p><p class="m">'+s[1]+'</p><p class="s"><b>In the story:</b> '+s[2]+'</p>';
+  w.querySelectorAll('.chips button').forEach(function(b,k){b.className=k===cur?'on':'';b.style.background=k===cur?COL[ST[k][3]]:''});
+  w.querySelectorAll('.dot circle').forEach(function(d,k){d.setAttribute('r',k===cur?32:24)})}
+ w.querySelectorAll('[data-i]').forEach(function(el){el.addEventListener('click',function(){show(+el.dataset.i)})});
+ w.querySelector('.pv').onclick=function(){show(cur-1)};w.querySelector('.nx').onclick=function(){show(cur+1)};
+ show(0);fig.replaceWith(w)}
+function scan(){document.querySelectorAll('.notes figure img[src$="plot.svg"]').forEach(function(img){var f=img.closest('figure');if(f)build(f)})}
+new MutationObserver(scan).observe(document.body,{childList:true,subtree:true});scan();
 })();
 </script>
 </body>
