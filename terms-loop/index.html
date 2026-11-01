@@ -306,6 +306,7 @@ textarea.dump:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,122,2
 @keyframes bump{40%{transform:scale(1.08)}}
 .swipehint{text-align:center;font-size:13px;color:var(--ink-3);margin-top:-8px}
 @media (prefers-reduced-motion:reduce){.card.fly-ok,.card.fly-no,.card.enter,.card.flipin,.btn.bump{animation:none}}
+.learned{margin:0;font-size:17px}.learned b{color:#1f8a3b;font-size:22px}
 </style>
 </head>
 <body>
@@ -874,16 +875,16 @@ function stepBreak(sec,s){
 /* Step 3: flashcards */
 function newPass(sec,s,which){const pool=which==="missed"&&s.fc&&s.fc.missed.length?s.fc.missed:sec.cards.map((c,i)=>i);s.fc={order:shuffle(pool),pos:0,flip:false,got:[],missed:[]};s.passes++;save()}
 function stepCards(sec,s){
-  if(s.fc&&s.fc.order.some(k=>k>=sec.cards.length))s.fc=null;if(!s.fc){s.passes=0;newPass(sec,s,"all")}
+  if(s.fc&&s.fc.order.some(k=>k>=sec.cards.length))s.fc=null;if(!s.fc){s.passes=0;s.learned=[];newPass(sec,s,"all")}if(!s.learned)s.learned=[];
   const f=s.fc,quiz='<div class="quiz"><span class="small">Quizlet</span>'+(sec.quizlet?'<a class="btn" href="'+esc(sec.quizlet)+'" target="_blank" rel="noopener">Open the Quizlet set</a>':"")+'<button class="btn quiet" id="qcopy">Copy cards for Quizlet import</button><div id="qbox" style="width:100%"></div></div>';
   if(f.pos>=f.order.length){
     const g=f.got.length,n=f.order.length;
     return '<section class="panel"><span class="eyebrow num">Pass '+s.passes+" done</span><div class=\"tally\"><div><b class=\"okc num\">"+g+'</b><span class="small">got it</span></div><div><b class="noc num">'+f.missed.length+'</b><span class="small">missed</span></div><div><b class="num">'+n+'</b><span class="small">cards</span></div></div>'+
     (f.missed.length?'<div class="notes"><p class="muted">Missed this pass:</p><ul>'+f.missed.map(k=>"<li>"+rich(sec.cards[k][0])+"</li>").join("")+"</ul></div>":"")+
-    '<div class="actions">'+(s.passes<2?(f.missed.length?'<button class="btn" id="again-m">Second pass on the '+f.missed.length+" missed</button>":"")+'<button class="btn" id="again-a">Second pass on all</button>':"")+'<button class="btn quiet" id="undo">&#8630; Back to last card <kbd>Ctrl Z</kbd></button><button class="btn primary" id="go">Take a break <kbd>Enter</kbd></button></div>'+quiz+"</section>";
+    '<p class="learned num"><b>'+s.learned.length+' of '+sec.cards.length+'</b> learned'+(s.learned.length>=sec.cards.length?'. Every card locked in.':'. Keep looping the missed ones until you have all '+sec.cards.length+'.')+'</p><div class="fcbar"><span class="track"><i style="width:'+(100*s.learned.length/sec.cards.length)+'%;background:#34c759"></i></span></div><div class="actions">'+(f.missed.length?'<button class="btn primary" id="again-m">Keep going on the '+f.missed.length+' missed <kbd>Enter</kbd></button>':'')+'<button class="btn" id="again-a">Start over with all '+sec.cards.length+'</button><button class="btn quiet" id="undo">&#8630; Back to last card <kbd>Ctrl Z</kbd></button><button class="btn'+(f.missed.length?'':' primary')+'" id="go">Take a break'+(f.missed.length?'':' <kbd>Enter</kbd>')+'</button></div>'+quiz+"</section>";
   }
   const c=sec.cards[f.order[f.pos]];
-  return '<section class="panel"><div class="fcbar num"><span>Pass '+s.passes+'</span><span class="track"><i style="width:'+(100*f.pos/f.order.length)+'%"></i></span><span>'+(f.pos+1)+" / "+f.order.length+'</span></div>'+
+  return '<section class="panel"><div class="fcbar num"><span>Pass '+s.passes+' &middot; '+s.learned.length+'/'+sec.cards.length+' learned</span><span class="track"><i style="width:'+(100*f.pos/f.order.length)+'%"></i></span><span>'+(f.pos+1)+" / "+f.order.length+'</span></div>'+
   '<div class="card" id="card" role="button" tabindex="0" aria-label="Flip card"><span class="side-l">'+(f.flip?"Answer":"Term")+'</span>'+(f.flip?'<div><div class="term">'+rich(c[0])+'</div><div class="back">'+rich(c[1])+"</div></div>":'<div class="front">'+rich(c[0])+"</div>")+'<span class="stamp ok">Got it</span><span class="stamp no">Still learning</span><span class="hint">'+(f.flip?"":"Tap or press space to flip")+'</span></div>'+
   '<div class="actions" style="justify-content:center"><button class="btn no" id="miss"'+(f.flip?"":" disabled")+'><span class="cnt">'+f.missed.length+'</span>Still learning <kbd>&larr;</kbd></button><button class="btn ok" id="got"'+(f.flip?"":" disabled")+'>Got it <kbd>&rarr;</kbd><span class="cnt">'+f.got.length+'</span></button></div><p class="swipehint">Swipe the card right if you got it, left if you are still learning</p><div class="actions" style="justify-content:center;margin-top:-8px"><button class="btn quiet" id="undo"'+(f.pos?"":" disabled")+'>&#8630; Back to last card <kbd>Ctrl Z</kbd></button></div>'+quiz+"</section>";
 }
@@ -921,17 +922,17 @@ function bindStep(sec,s){
   if(s.step===2){
     const f=s.fc;
     const qc=$("#qcopy");if(qc)qc.onclick=()=>{const txt=sec.cards.map(c=>c[0]+"\t"+String(c[1]).replace(/\s*\n\s*/g," ")).join("\n");const done=()=>toast("Copied "+sec.cards.length+" cards. In Quizlet: Import, paste, Tab between term and definition.");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,()=>fallback(txt))}else fallback(txt)};
-    const undo=()=>{if(!f.pos)return;f.pos--;const k=f.order[f.pos],h=(f.hist||[]).pop();if(h===1||(h===undefined&&f.got[f.got.length-1]===k))f.got.pop();else f.missed.pop();f.flip=true;save();render()};
+    const undo=()=>{if(!f.pos)return;f.pos--;const k=f.order[f.pos],h=(f.hist||[]).pop();if(h===1||(h===undefined&&f.got[f.got.length-1]===k)){f.got.pop();const li=s.learned.lastIndexOf(k);if(li>=0)s.learned.splice(li,1)}else f.missed.pop();f.flip=true;save();render()};
     bindStep.undo=undo;if($("#undo"))$("#undo").onclick=undo;
     if(f.pos>=f.order.length){
       if($("#again-m"))$("#again-m").onclick=()=>{newPass(sec,s,"missed");render()};
-      if($("#again-a"))$("#again-a").onclick=()=>{newPass(sec,s,"all");render()};
+      if($("#again-a"))$("#again-a").onclick=()=>{s.learned=[];newPass(sec,s,"all");render()};
       goBtn.onclick=()=>next(sec,s);
       return;
     }
     const card=$("#card");let busy=false;
     const flip=()=>{if(busy)return;f.flip=!f.flip;save();render();const c2=$("#card");if(c2&&!still.matches)c2.classList.add("flipin")};
-    const commit=(ok)=>{const k=f.order[f.pos];(ok?f.got:f.missed).push(k);(f.hist=f.hist||[]).push(ok?1:0);f.pos++;f.flip=false;save();render();const c2=$("#card");if(c2&&!still.matches)c2.classList.add("enter");const b2=$(ok?"#got":"#miss");if(b2&&!still.matches)b2.classList.add("bump")};
+    const commit=(ok)=>{const k=f.order[f.pos];if(ok&&s.learned.indexOf(k)<0)s.learned.push(k);(ok?f.got:f.missed).push(k);(f.hist=f.hist||[]).push(ok?1:0);f.pos++;f.flip=false;save();render();const c2=$("#card");if(c2&&!still.matches)c2.classList.add("enter");const b2=$(ok?"#got":"#miss");if(b2&&!still.matches)b2.classList.add("bump")};
     const mark=(ok,fromDrag)=>{if(busy)return;if(!f.flip&&!fromDrag)return;busy=true;card.classList.remove("drag");card.style.transform="";card.classList.add(ok?"tint-ok":"tint-no");
       if(still.matches){setTimeout(()=>commit(ok),220);return}
       card.classList.add(ok?"fly-ok":"fly-no");setTimeout(()=>commit(ok),340)};
@@ -1007,7 +1008,7 @@ document.addEventListener("keydown",e=>{
     else if(e.key==="ArrowLeft"){e.preventDefault();bindStep.mark&&bindStep.mark(false)}
     return;
   }
-  if(e.key==="Enter"&&tag!=="button"&&tag!=="a"){const g=$("#go");if(g){e.preventDefault();g.click()}}
+  if(e.key==="Enter"&&tag!=="button"&&tag!=="a"){const am=$("#again-m");if(s.step===2&&am){e.preventDefault();am.click();return}const g=$("#go");if(g){e.preventDefault();g.click()}}
 });
 let lastNarrow=matchMedia("(max-width:860px)").matches;
 addEventListener("resize",()=>{const n=matchMedia("(max-width:860px)").matches;if(n!==lastNarrow){lastNarrow=n;renderSide()}});
