@@ -852,12 +852,12 @@ function stepCards(sec,s){
     const g=f.got.length,n=f.order.length;
     return '<section class="panel"><span class="eyebrow num">Pass '+s.passes+" done</span><div class=\"tally\"><div><b class=\"okc num\">"+g+'</b><span class="small">got it</span></div><div><b class="noc num">'+f.missed.length+'</b><span class="small">missed</span></div><div><b class="num">'+n+'</b><span class="small">cards</span></div></div>'+
     (f.missed.length?'<div class="notes"><p class="muted">Missed this pass:</p><ul>'+f.missed.map(k=>"<li>"+rich(sec.cards[k][0])+"</li>").join("")+"</ul></div>":"")+
-    '<div class="actions">'+(s.passes<2?(f.missed.length?'<button class="btn" id="again-m">Second pass on the '+f.missed.length+" missed</button>":"")+'<button class="btn" id="again-a">Second pass on all</button>':"")+'<button class="btn primary" id="go">Take a break <kbd>Enter</kbd></button></div>'+quiz+"</section>";
+    '<div class="actions">'+(s.passes<2?(f.missed.length?'<button class="btn" id="again-m">Second pass on the '+f.missed.length+" missed</button>":"")+'<button class="btn" id="again-a">Second pass on all</button>':"")+'<button class="btn quiet" id="undo">&#8630; Back to last card <kbd>Ctrl Z</kbd></button><button class="btn primary" id="go">Take a break <kbd>Enter</kbd></button></div>'+quiz+"</section>";
   }
   const c=sec.cards[f.order[f.pos]];
   return '<section class="panel"><div class="fcbar num"><span>Pass '+s.passes+'</span><span class="track"><i style="width:'+(100*f.pos/f.order.length)+'%"></i></span><span>'+(f.pos+1)+" / "+f.order.length+'</span></div>'+
   '<div class="card" id="card" role="button" tabindex="0" aria-label="Flip card"><span class="side-l">'+(f.flip?"Answer":"Term")+'</span>'+(f.flip?'<div><div class="term">'+rich(c[0])+'</div><div class="back">'+rich(c[1])+"</div></div>":'<div class="front">'+rich(c[0])+"</div>")+'<span class="hint">'+(f.flip?"":"Click or press space to flip")+'</span></div>'+
-  '<div class="actions" style="justify-content:center"><button class="btn no" id="miss"'+(f.flip?"":" disabled")+'>Missed <kbd>&larr;</kbd></button><button class="btn ok" id="got"'+(f.flip?"":" disabled")+'>Got it <kbd>&rarr;</kbd></button></div>'+quiz+"</section>";
+  '<div class="actions" style="justify-content:center"><button class="btn no" id="miss"'+(f.flip?"":" disabled")+'>Missed <kbd>&larr;</kbd></button><button class="btn ok" id="got"'+(f.flip?"":" disabled")+'>Got it <kbd>&rarr;</kbd></button></div><div class="actions" style="justify-content:center;margin-top:-8px"><button class="btn quiet" id="undo"'+(f.pos?"":" disabled")+'>&#8630; Back to last card <kbd>Ctrl Z</kbd></button></div>'+quiz+"</section>";
 }
 
 /* Step 5: brain dump */
@@ -893,6 +893,8 @@ function bindStep(sec,s){
   if(s.step===2){
     const f=s.fc;
     const qc=$("#qcopy");if(qc)qc.onclick=()=>{const txt=sec.cards.map(c=>c[0]+"\t"+String(c[1]).replace(/\s*\n\s*/g," ")).join("\n");const done=()=>toast("Copied "+sec.cards.length+" cards. In Quizlet: Import, paste, Tab between term and definition.");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,()=>fallback(txt))}else fallback(txt)};
+    const undo=()=>{if(!f.pos)return;f.pos--;const k=f.order[f.pos],h=(f.hist||[]).pop();if(h===1||(h===undefined&&f.got[f.got.length-1]===k))f.got.pop();else f.missed.pop();f.flip=true;save();render()};
+    bindStep.undo=undo;if($("#undo"))$("#undo").onclick=undo;
     if(f.pos>=f.order.length){
       if($("#again-m"))$("#again-m").onclick=()=>{newPass(sec,s,"missed");render()};
       if($("#again-a"))$("#again-a").onclick=()=>{newPass(sec,s,"all");render()};
@@ -902,7 +904,7 @@ function bindStep(sec,s){
     const card=$("#card");
     const flip=()=>{f.flip=!f.flip;save();render()};
     card.onclick=flip;
-    const mark=(ok)=>{if(!f.flip)return;const k=f.order[f.pos];(ok?f.got:f.missed).push(k);f.pos++;f.flip=false;save();render();const c2=$("#card");if(c2){c2.classList.add(ok?"flash-ok":"flash-no")}};
+    const mark=(ok)=>{if(!f.flip)return;const k=f.order[f.pos];(ok?f.got:f.missed).push(k);(f.hist=f.hist||[]).push(ok?1:0);f.pos++;f.flip=false;save();render();const c2=$("#card");if(c2){c2.classList.add(ok?"flash-ok":"flash-no")}};
     $("#got").onclick=()=>mark(true);$("#miss").onclick=()=>mark(false);
     bindStep.mark=mark;bindStep.flip=flip;
   }
@@ -960,6 +962,7 @@ document.addEventListener("keydown",e=>{
   if(!S.cur)return;const s=st(S.cur);const tag=(e.target.tagName||"").toLowerCase();
   if(s.step===4){if(e.key==="Enter"&&(e.ctrlKey||e.metaKey)){e.preventDefault();$("#go").click()}return}
   if(tag==="textarea"||tag==="select"||tag==="input")return;
+  if(s.step===2&&s.fc&&(e.ctrlKey||e.metaKey)&&(e.key==="z"||e.key==="Z")){e.preventDefault();bindStep.undo&&bindStep.undo();return}
   if(s.step===2&&s.fc&&s.fc.pos<s.fc.order.length){
     if(e.key===" "){e.preventDefault();bindStep.flip&&bindStep.flip()}
     else if(e.key==="ArrowRight"){e.preventDefault();bindStep.mark&&bindStep.mark(true)}
