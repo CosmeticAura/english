@@ -846,7 +846,7 @@ function stepBreak(sec,s){
 /* Step 3: flashcards */
 function newPass(sec,s,which){const pool=which==="missed"&&s.fc&&s.fc.missed.length?s.fc.missed:sec.cards.map((c,i)=>i);s.fc={order:shuffle(pool),pos:0,flip:false,got:[],missed:[]};s.passes++;save()}
 function stepCards(sec,s){
-  if(!s.fc){s.passes=0;newPass(sec,s,"all")}
+  if(s.fc&&s.fc.order.some(k=>k>=sec.cards.length))s.fc=null;if(!s.fc){s.passes=0;newPass(sec,s,"all")}
   const f=s.fc,quiz='<div class="quiz"><span class="small">Quizlet</span>'+(sec.quizlet?'<a class="btn" href="'+esc(sec.quizlet)+'" target="_blank" rel="noopener">Open the Quizlet set</a>':"")+'<button class="btn quiet" id="qcopy">Copy cards for Quizlet import</button><div id="qbox" style="width:100%"></div></div>';
   if(f.pos>=f.order.length){
     const g=f.got.length,n=f.order.length;
