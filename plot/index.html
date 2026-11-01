@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interpreter of Maladies: elements and plot</title>
+<style>
+:root{--bg:#f2f2f7;--cell:#fff;--label:#000;--sec:rgba(60,60,67,.6);--ter:rgba(60,60,67,.3);--sep:rgba(60,60,67,.29);--fill:rgba(118,118,128,.12);--tint:#007aff;--green:#34c759;--red:#ff3b30;color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--label);font:17px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+main{max-width:720px;margin:0 auto;padding:12px 16px 56px}
+header{padding:28px 4px 4px}
+h1{font:700 34px/1.15 -apple-system,"SF Pro Display",system-ui,sans-serif;margin:0}
+.lede{color:var(--sec);font-size:15px;margin:6px 0 0}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+nav a{font-size:15px;font-weight:600;color:var(--tint);background:var(--fill);padding:7px 14px;border-radius:999px;text-decoration:none}
+h2{font-size:13px;font-weight:400;text-transform:uppercase;letter-spacing:.02em;color:var(--sec);margin:30px 0 7px 16px}
+.group{background:var(--cell);border-radius:10px;overflow:hidden}
+.row{padding:12px 16px;position:relative}
+.row + .row::before{content:"";position:absolute;left:16px;right:0;top:0;border-top:.5px solid var(--sep)}
+.row h3{font-size:17px;margin:0 0 3px;font-weight:600}
+.row .t{font-size:13px;color:var(--sec);text-transform:uppercase;letter-spacing:.02em;margin-bottom:2px}
+.row p{margin:4px 0;font-size:16px}
+.q{color:var(--sec);font-style:italic}
+.note{font-size:13px;color:var(--sec);margin:7px 16px 0}
+.diag{padding:16px 8px 8px}
+svg{width:100%;height:auto;display:block}
+svg text{font:20px -apple-system,system-ui,sans-serif;fill:#000}
+svg .lab{font-weight:600;fill:var(--tint)}
+.stage{display:grid;grid-template-columns:116px 1fr;gap:12px}
+.stage .t{margin:2px 0 0}
+@media (max-width:520px){.stage{grid-template-columns:1fr;gap:2px}}
+select{font:inherit;font-size:16px;padding:7px 10px;border-radius:9px;border:0;background:var(--fill);color:var(--label);max-width:100%}
+select.ok{box-shadow:0 0 0 2px var(--green)}select.no{box-shadow:0 0 0 2px var(--red)}
+.ev{display:grid;gap:6px}
+.ans{font-size:14px;color:var(--sec)}.ans b.ok{color:var(--green)}.ans b.no{color:var(--red)}
+button{font:600 15px -apple-system,system-ui,sans-serif;padding:9px 18px;border-radius:999px;border:0;background:var(--tint);color:#fff;cursor:pointer}
+button.gray{background:var(--fill);color:var(--tint)}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.score{font-size:15px;color:var(--sec)}
+details summary{cursor:pointer;color:var(--tint);font-size:15px;font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details[open] summary{margin-bottom:6px}
+.k{display:inline-block;font-size:12px;font-weight:600;color:var(--tint);background:rgba(0,122,255,.1);padding:2px 8px;border-radius:999px;margin-right:6px}
+</style></head><body><main>
+<header><h1>Elements and plot</h1><p class="lede">"Interpreter of Maladies," mapped onto the two class handouts: the plot diagram and the elements and techniques list. Each one comes with where it shows up in the story and a quote you can use.</p>
+<nav><a href="../">Home</a><a href="#plot">Plot diagram</a><a href="#elements">Elements</a><a href="#techniques">Techniques</a><a href="#quiz">Quiz yourself</a><a href="#answer">How to answer</a></nav></header>
+
+<h2 id="plot">Plot diagram</h2>
+<div class="group"><div class="diag">
+<svg viewBox="0 0 680 290" role="img" aria-label="Plot diagram of the story">
+<polyline points="20,215 200,215 340,45 480,215 660,215" fill="none" stroke="#000" stroke-width="3"/>
+<g fill="#007aff"><circle cx="200" cy="215" r="6"/><circle cx="249" cy="155" r="6"/><circle cx="298" cy="96" r="6"/><circle cx="340" cy="45" r="7"/><circle cx="382" cy="96" r="6"/><circle cx="431" cy="155" r="6"/><circle cx="480" cy="215" r="6"/></g>
+<text x="20" y="245">Exposition</text>
+<text x="200" y="275" text-anchor="middle">Inciting incident</text>
+<text x="235" y="161" text-anchor="end">Rising action</text>
+<text x="284" y="102" text-anchor="end">Complication</text>
+<text class="lab" x="340" y="27" text-anchor="middle">Climax</text>
+<text x="396" y="102">Reversal</text>
+<text x="445" y="161">Falling action</text>
+<text x="480" y="275" text-anchor="middle">Resolution</text>
+<text x="660" y="245" text-anchor="end">Denouement</text>
+</svg></div>
+<div class="row stage"><div class="t">Exposition</div><div><p>The Das family, Indian Americans from New Jersey, tour Orissa with Mr. Kapasi, their 46 year old guide, on the way to the Sun Temple at Konarak. Mr. and Mrs. Das bicker and act "like siblings," not parents.</p></div></div>
+<div class="row stage"><div class="t">Inciting incident</div><div><p>Mr. Kapasi says his other job is interpreting for a doctor. Mrs. Das calls it <span class="q">"But so romantic,"</span> and his fascination with her begins.</p></div></div>
+<div class="row stage"><div class="t">Rising action</div><div><p>He tells her more patient stories, eats lunch with the family, writes his address for her and imagines years of letters. At the Sun Temple he wants to be alone with her, then stretches the trip to the hills at Udayagiri and Khandagiri.</p></div></div>
+<div class="row stage"><div class="t">Complication</div><div><p>Mrs. Das stays in the car and confesses that Bobby is not Raj's son. She wants Mr. Kapasi to "interpret" her pain and make her feel better.</p></div></div>
+<div class="row stage"><div class="t">Climax</div><div><p>He asks, <span class="q">"Is it really pain you feel, Mrs. Das, or is it guilt?"</span> She glares and walks off, and he realizes he was <span class="q">"not even important enough to be properly insulted."</span> His fantasy ends here.</p></div></div>
+<div class="row stage"><div class="t">Reversal</div><div><p>Her spilled puffed rice draws the monkeys after her, and the story turns from Mr. Kapasi's private hopes to the family's danger.</p></div></div>
+<div class="row stage"><div class="t">Falling action</div><div><p>The monkeys surround Bobby and hit him with the stick. Mr. Kapasi drives them off with a branch and carries Bobby back.</p></div></div>
+<div class="row stage"><div class="t">Resolution</div><div><p>The family patches Bobby up and decides to go back to the hotel. <span class="q">"Poor Bobby,"</span> Mrs. Das says.</p></div></div>
+<div class="row stage"><div class="t">Denouement</div><div><p>When she pulls out her hairbrush, the slip with Mr. Kapasi's address blows away. Only he sees it, <span class="q">"knowing that this was the picture of the Das family he would preserve forever in his mind."</span></p></div></div>
+</div>
+<p class="note">Easy way to remember: everything up the slope is his hope growing. The peak is the guilt question. Everything down the slope is that hope falling apart.</p>
+
+<h2 id="elements">Literary elements</h2>
+<div class="group">
+<div class="row"><div class="t">Character</div>
+<p><span class="k">Protagonist</span>Mr. Kapasi. <span class="k">Antagonist</span>no villain; the closest is Mrs. Das, or his own fantasy.</p>
+<p><span class="k">Dynamic, round</span>Mr. Kapasi goes from flattered and hopeful to crushed and clear eyed. <span class="k">Static</span>Mr. and Mrs. Das end exactly as careless as they started. <span class="k">Flat</span>Ronny, Tina, and mostly Mr. Das.</p>
+<p><span class="k">Foil</span>Mr. Das (only sees through his camera and tour book) against Mr. Kapasi (watches people closely). Mrs. Das also mirrors Mr. Kapasi's wife: two unhappy marriages.</p></div>
+<div class="row"><div class="t">Five ways the author shows character</div>
+<p><b>Dialogue:</b> Mrs. Das, "Leave me alone," to Tina, who wants her nails painted.</p>
+<p><b>Action:</b> she doesn't hold Tina's hand and never shares her puffed rice.</p>
+<p><b>Thoughts and feelings:</b> Mr. Kapasi's daydream of letters "between nations."</p>
+<p><b>What others say:</b> Mrs. Das calls his job "a big responsibility," while his wife calls him a "doctor's assistant."</p>
+<p><b>Narrator's description:</b> her sunglasses, strawberry shirt and "paws" of hands.</p></div>
+<div class="row"><div class="t">Conflict</div>
+<p><b>Internal:</b> Mr. Kapasi's loneliness and failed dreams; Mrs. Das's eight years of guilt.</p>
+<p><b>External:</b> Mr. and Mrs. Das bickering about the car and the bathroom; Mr. Kapasi against Mrs. Das at the climax; Bobby against the monkeys.</p></div>
+<div class="row"><div class="t">Diction</div>
+<p><b>"Interpreter"</b> denotes someone who translates languages, but it connotes someone who understands people's pain. That is what Mrs. Das wants, and Mr. Kapasi can't do it. <b>"Romantic"</b> just means interesting to her, but it connotes love to him.</p></div>
+<div class="row"><div class="t">Point of view</div>
+<p><b>Third person limited.</b> We only get Mr. Kapasi's thoughts, so we share his fantasy and feel the drop when it breaks. We never really know what Mrs. Das thinks.</p></div>
+<div class="row"><div class="t">Setting</div>
+<p>A hot, dry Saturday in July in Orissa, India: the car, a roadside restaurant, the Sun Temple at Konarak, and the hills of Udayagiri and Khandagiri. The family are tourists in their parents' home country.</p></div>
+<div class="row"><div class="t">Theme</div>
+<p>People can share a language and still fail to understand each other. Also: loneliness inside a marriage, fantasy against reality, and feeling foreign in your own heritage.</p></div>
+<div class="row"><div class="t">Tone</div>
+<p>Quiet, detached and ironic, with a sad edge. The narrator never judges the characters out loud; the details do it.</p></div>
+</div>
+
+<h2 id="techniques">Techniques in this story</h2>
+<div class="group">
+<div class="row"><h3>Irony</h3><p><b>Situational:</b> Mr. Kapasi is a professional interpreter, yet he completely misreads Mrs. Das, and the person who wants an "interpreter" faces no language barrier at all. <b>Dramatic:</b> we know Bobby isn't Raj's son, but Mr. Das has no idea.</p></div>
+<div class="row"><h3>Symbolism</h3><p><b>Address slip</b> blowing away = his hope of a connection gone. <b>Puffed rice</b> = Mrs. Das's carelessness, which literally leads the monkeys to her son. <b>Camera and tour book</b> = Mr. Das sees life through a lens instead of looking. <b>Sunglasses</b> = Mrs. Das hiding from everyone. <b>The tired setting sun Surya</b> = Mr. Kapasi's day and hope winding down.</p></div>
+<div class="row"><h3>Foreshadowing</h3><p>Mr. Kapasi warns the monkeys are "more hungry than dangerous" and not to provoke them with food. Bobby hands a monkey a stick, the same stick later used on him. Mr. Kapasi worries his address will be lost before it ever is.</p></div>
+<div class="row"><h3>Motif</h3><p>Monkeys, photographs and pictures, and puffed rice keep coming back.</p></div>
+<div class="row"><h3>Juxtaposition</h3><p>The temple's carvings of lovers next to two loveless marriages. Mr. Kapasi's dream of letters next to Mrs. Das's confession, which shows she never saw him that way.</p></div>
+<div class="row"><h3>Simile and imagery</h3><p>Mr. and Mrs. Das "behaved like an older brother and sister." The monkeys' tails "dangled like a series of ropes." Tina's doll's hair looks chopped "with a pair of dull scissors."</p></div>
+<div class="row"><h3>Personification</h3><p>At the end the monkeys sit "solemnly observing the scene below," like an audience.</p></div>
+<div class="row"><h3>Allusion</h3><p>Mythological: Surya, the sun god, and the hanuman monkeys (named for the monkey god Hanuman). Pop culture: the TV show <i>Dallas</i>.</p></div>
+<div class="row"><h3>Mood</h3><p>Stuffy and awkward in the car, uneasy at the temple, tense and frightening when Bobby is attacked.</p></div>
+<div class="row"><h3>Paradox</h3><p>The title itself: an interpreter of maladies who can't interpret the one person who asks him to.</p></div>
+</div>
+<p class="note">The rest of the handout list (anaphora, onomatopoeia, rhyme and so on) doesn't really show up in this story, so don't force it.</p>
+
+<h2 id="quiz">Quiz yourself: which plot stage?</h2>
+<div class="group" id="qz"></div>
+<div class="bar" style="margin:10px 16px"><button id="chk">Check</button><button class="gray" id="rst">Reset</button><span class="score" id="sc"></span></div>
+
+<h2>Quiz yourself: name the element or technique</h2>
+<div class="group">
+<div class="row"><p>Mr. Kapasi, a professional interpreter, misreads Mrs. Das completely.</p><details><summary>Show answer</summary><p>Situational irony.</p></details></div>
+<div class="row"><p>The address slip flutters away into the trees.</p><details><summary>Show answer</summary><p>Symbolism (his hope of a connection is gone), and it's the denouement.</p></details></div>
+<div class="row"><p>"They are more hungry than dangerous. Do not provoke them with food."</p><details><summary>Show answer</summary><p>Foreshadowing: her spilled puffed rice is exactly what brings the attack.</p></details></div>
+<div class="row"><p>We only know what Mr. Kapasi thinks.</p><details><summary>Show answer</summary><p>Third person limited point of view.</p></details></div>
+<div class="row"><p>Mr. Kapasi changes by the end; the Das parents don't.</p><details><summary>Show answer</summary><p>Mr. Kapasi is dynamic; Mr. and Mrs. Das are static.</p></details></div>
+<div class="row"><p>Mr. Das only experiences the trip through his camera.</p><details><summary>Show answer</summary><p>Symbolism, and characterization through action. He's also a foil to the watchful Mr. Kapasi.</p></details></div>
+</div>
+
+<h2 id="answer">How to answer a question</h2>
+<div class="group">
+<div class="row"><p><b>1. Claim:</b> name the element or technique and say what it does. <b>2. Evidence:</b> a short quote or a specific moment. <b>3. Explain:</b> how that moment shows it. <b>4. Link:</b> what it adds to the theme.</p></div>
+<div class="row"><p class="q">Example: Lahiri uses situational irony to show that real understanding is about more than language. Mr. Kapasi is a professional interpreter, yet when Mrs. Das confesses her secret, he asks, "Is it really pain you feel, Mrs. Das, or is it guilt?" and she walks away. The man paid to understand others can't understand the one person who asks him to, which shows that sharing a language doesn't mean people truly connect.</p></div>
+</div>
+</main>
+<script>
+(function(){
+var stages=['Exposition','Inciting incident','Rising action','Complication','Climax','Reversal','Falling action','Resolution','Denouement'];
+var items=[
+['Mrs. Das calls Mr. Kapasi\'s job "romantic."','Inciting incident'],
+['Mr. Kapasi drives the monkeys away from Bobby with a branch.','Falling action'],
+['The Das family is introduced at Hotel Sandy Villa, on the way to Konarak.','Exposition'],
+['"Is it really pain you feel, Mrs. Das, or is it guilt?"','Climax'],
+['The slip with his address blows into the trees.','Denouement'],
+['Mrs. Das confesses Bobby isn\'t Raj\'s son.','Complication'],
+['Mr. Kapasi writes his address and imagines years of letters.','Rising action'],
+['Her trail of puffed rice draws the monkeys after her.','Reversal'],
+['The family decides to head back to the hotel.','Resolution']];
+var qz=document.getElementById('qz');
+items.forEach(function(it,i){var d=document.createElement('div');d.className='row ev';
+ d.innerHTML='<p>'+it[0]+'</p><select data-i="'+i+'"><option value="">Pick a stage</option>'+stages.map(function(s){return '<option>'+s+'</option>'}).join('')+'</select><span class="ans"></span>';qz.appendChild(d)});
+document.getElementById('chk').onclick=function(){var ok=0;qz.querySelectorAll('select').forEach(function(s){var a=items[+s.dataset.i][1],r=s.parentNode.querySelector('.ans');
+ if(!s.value){s.className='';r.textContent='';return}
+ if(s.value===a){ok++;s.className='ok';r.innerHTML='<b class="ok">Right</b>'}else{s.className='no';r.innerHTML='<b class="no">Not quite.</b> It\'s the '+a.toLowerCase()+'.'}});
+ document.getElementById('sc').textContent=ok+' of '+items.length+' right'};
+document.getElementById('rst').onclick=function(){qz.querySelectorAll('select').forEach(function(s){s.value='';s.className='';s.parentNode.querySelector('.ans').textContent=''});document.getElementById('sc').textContent=''};
+})();
+</script></body></html>

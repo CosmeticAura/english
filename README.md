@@ -5,6 +5,7 @@ Study loops for the Representations of Social Conflict quiz on "Interpreter of M
 Live site: https://cosmeticaura.github.io/english/
 
 - `story/` runs each section as a loop: read and take Cornell notes, a 5 minute break, flashcards, another break, a brain dump, then mark what you missed. `?s=quotes` opens a section directly.
+- `plot/` applies the plot diagram stages and the literary elements and techniques handouts to the story, with quotes and two self quizzes.
 - `practice/` lets you pick 2 likely questions, answer them in 20 minutes, check each answer for claim, quote, explanation and link, then compare with a model outline.
 
 Progress saves in your browser only. The deck lives in `deck.json`; rebuild with the studynow kit: `python3 build.py course.py OUT`.
