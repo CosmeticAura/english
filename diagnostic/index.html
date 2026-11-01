@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English diagnostic</title>
+<style>
+:root{--bg:#f2f2f7;--cell:#fff;--label:#000;--sec:rgba(60,60,67,.6);--ter:rgba(60,60,67,.3);--sep:rgba(60,60,67,.29);--fill:rgba(118,118,128,.12);--tint:#007aff;--green:#34c759;--red:#ff3b30;color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--label);font:17px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+main{max-width:680px;margin:0 auto;padding:12px 16px 56px}
+header{padding:28px 4px 4px}
+h1{font:700 34px/1.15 -apple-system,"SF Pro Display",system-ui,sans-serif;margin:0}
+.lede{color:var(--sec);font-size:15px;margin:6px 0 0}
+h2{font-size:13px;font-weight:400;text-transform:uppercase;letter-spacing:.02em;color:var(--sec);margin:30px 0 7px 16px}
+.group{background:var(--cell);border-radius:10px;overflow:hidden}
+.row{padding:12px 16px;position:relative;display:grid;gap:8px;grid-template-columns:minmax(0,1fr)}
+.row + .row::before{content:"";position:absolute;left:16px;right:0;top:0;border-top:.5px solid var(--sep)}
+.row p{margin:0;font-size:16px}
+select,textarea{font:inherit;font-size:16px;padding:8px 12px;border-radius:10px;border:0;background:var(--fill);color:var(--label);max-width:100%;outline:none}
+textarea{width:100%;min-height:120px;resize:vertical}
+select:focus,textarea:focus{box-shadow:0 0 0 2px var(--tint)}
+.ok{box-shadow:0 0 0 2px var(--green)!important}.no{box-shadow:0 0 0 2px var(--red)!important}
+.opts{display:grid;gap:6px}
+.opts label{display:flex;gap:10px;align-items:flex-start;font-size:16px;padding:8px 10px;border-radius:10px;background:var(--fill);cursor:pointer}
+.opts input{margin:3px 0 0;accent-color:var(--tint);flex:none}
+.opts label.ok{background:rgba(52,199,89,.14);box-shadow:none!important}.opts label.no{background:rgba(255,59,48,.12);box-shadow:none!important}
+.fb{font-size:14px;color:var(--sec)}.fb:empty{display:none}.fb b.g{color:var(--green)}.fb b.r{color:var(--red)}
+.model{font-size:15px;background:rgba(0,122,255,.07);border-radius:10px;padding:10px 12px}
+.checks{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:15px}
+.checks label{display:flex;gap:6px;align-items:center}
+button{font:600 15px -apple-system,system-ui,sans-serif;padding:10px 20px;border-radius:999px;border:0;background:var(--tint);color:#fff;cursor:pointer}
+button.gray{background:var(--fill);color:var(--tint)}
+button:active{opacity:.6}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 4px 0}
+.score{font-size:22px;font-weight:700}
+#out{font:13px/1.45 ui-monospace,Menlo,monospace;min-height:160px}
+[hidden]{display:none!important}
+</style></head><body><main>
+<header><p><a href="../" style="color:#007aff;text-decoration:none;font-weight:600">&lsaquo; Home</a></p><h1>English diagnostic</h1><p class="lede">"Interpreter of Maladies," about 15 minutes, no notes. Part 1 is the plot diagram, part 2 is the elements and techniques, part 3 is two written answers. If you don't know one, leave it blank instead of guessing. Press Grade at the end.</p></header>
+<h2>Part 1: which plot stage is this?</h2><div class="group" id="p1"></div>
+<h2>Part 2: elements and techniques</h2><div class="group" id="p2"></div>
+<h2>Part 3: written answers</h2><div class="group" id="p3"></div>
+<div class="bar"><button id="go">Grade</button><button class="gray" id="rs">Start over</button></div>
+<div id="after" hidden>
+<h2>Your score</h2><div class="group"><div class="row"><p class="score" id="sc"></p><p class="fb" id="sc2"></p></div>
+<div class="row"><p>Mark your written answers using the model answers above. Then study what you missed in the <a href="../terms-loop/">plot and terms loop</a> and the <a href="../plot/">elements and plot page</a>, and come back to retake it.</p></div></div></div>
+</main>
+<script>
+(function(){
+var D={"P": [["Mr. Kapasi picks up the Das family at Hotel Sandy Villa for the trip to Konarak.", "Exposition"], ["Mrs. Das calls his job interpreting for a doctor \"so romantic.\"", "Inciting incident"], ["Mr. Kapasi suggests adding the hills at Udayagiri and Khandagiri to the trip.", "Rising action"], ["Mrs. Das tells him Bobby is not her husband's son.", "Complication"], ["\"Is it really pain you feel, Mrs. Das, or is it guilt?\"", "Climax"], ["Her trail of puffed rice draws the monkeys after her.", "Reversal"], ["Mr. Kapasi drives the monkeys away from Bobby with a branch.", "Falling action"], ["The family decides to head back to the hotel. \"Poor Bobby.\"", "Resolution"], ["The slip with Mr. Kapasi's address blows away into the trees.", "Denouement"]], "M": [["What point of view is the story told in?", ["First person, Mr. Kapasi", "Third person limited, Mr. Kapasi", "Third person omniscient", "Second person"], 1, "pov"], ["Mr. Kapasi is a professional interpreter, yet he completely misreads Mrs. Das. This is", ["Dramatic irony", "Verbal irony", "Situational irony", "Foreshadowing"], 2, "irony"], ["The reader knows Bobby isn't Mr. Das's son, but Mr. Das has no idea. This is", ["Dramatic irony", "Situational irony", "Paradox", "Juxtaposition"], 0, "irony"], ["The address slip blowing away symbolizes", ["Mrs. Das's guilt", "Mr. Kapasi's hope of a real connection ending", "The Das family leaving India", "Bobby's real father"], 1, "symbol"], ["Mr. Kapasi warns that the monkeys are hungry and not to provoke them with food. This is", ["Foreshadowing", "Imagery", "Allusion", "Mood"], 0, "foreshadow"], ["Which character is dynamic?", ["Mr. Das", "Mrs. Das", "Mr. Kapasi", "Tina"], 2, "character"], ["Mr. Das is a foil to Mr. Kapasi because", ["They are both unhappily married", "Mr. Das sees the trip through his camera while Mr. Kapasi watches people closely", "They both grew up in India", "Mr. Das is the antagonist"], 1, "character"], ["The word \"interpreter\" means a translator, but suggests someone who understands people's pain. That difference is about", ["Diction (denotation and connotation)", "Setting", "Point of view", "Motif"], 0, "diction"], ["Surya the sun god and the Hanuman monkeys are examples of", ["Personification", "Allusion", "Simile", "Paradox"], 1, "technique"], ["Which is the best statement of the theme?", ["Tourists should respect local culture", "People can share a language and still fail to understand each other", "Monkeys are dangerous", "Family always comes first"], 1, "theme"], ["Mrs. Das's eight years of guilt is what kind of conflict?", ["External, person vs person", "External, person vs nature", "Internal", "External, person vs society"], 2, "conflict"], ["The narrator's tone is best described as", ["Angry and judgmental", "Cheerful and comic", "Quiet, detached and ironic", "Suspenseful and frightening the whole time"], 2, "tone"]], "W": [["How does Lahiri use the address slip to develop a theme? Answer with a claim, a quote or moment, an explanation and a link to the theme.", "Lahiri uses the address slip as a symbol of Mr. Kapasi's hope for a real connection. He writes it down and imagines years of letters, but at the end it slips out of Mrs. Das's bag and blows away, and only he sees it. Losing it shows his dream was one sided, which supports the theme that people can talk easily and still never understand each other."], ["Why is Mr. Kapasi's question \"Is it really pain you feel, Mrs. Das, or is it guilt?\" the climax of the story?", "It is the turning point. Up to here his hope keeps rising. When he asks, Mrs. Das glares and walks off, and he realizes he was \"not even important enough to be properly insulted.\" His fantasy ends right there, and everything after it (the monkeys, the slip) falls from that moment."]], "S": ["Exposition", "Inciting incident", "Rising action", "Complication", "Climax", "Reversal", "Falling action", "Resolution", "Denouement"]},K='engdiag',S={};try{S=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+function sv(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function row(box,html){var d=document.createElement('div');d.className='row';d.innerHTML=html;box.appendChild(d);return d}
+var p1=document.getElementById('p1'),p2=document.getElementById('p2'),p3=document.getElementById('p3');
+D.P.forEach(function(it,i){var r=row(p1,'<p>'+(i+1)+'. '+it[0]+'</p><select><option value="">Pick a stage</option>'+D.S.map(function(s){return '<option>'+s+'</option>'}).join('')+'</select><span class="fb"></span>');
+ var s=r.querySelector('select');s.value=S['p'+i]||'';s.onchange=function(){S['p'+i]=s.value;sv()}});
+D.M.forEach(function(it,i){var r=row(p2,'<p>'+(i+10)+'. '+it[0]+'</p><div class="opts">'+it[1].map(function(o,j){return '<label><input type="radio" name="m'+i+'" value="'+j+'">'+o+'</label>'}).join('')+'</div><span class="fb"></span>');
+ r.querySelectorAll('input').forEach(function(x){if(S['m'+i]===x.value)x.checked=true;x.onchange=function(){S['m'+i]=x.value;sv()}})});
+D.W.forEach(function(it,i){var r=row(p3,'<p>'+(i+22)+'. '+it[0]+'</p><textarea placeholder="Your answer"></textarea><div class="model" hidden><b>Model answer.</b> '+it[1]+'</div><div class="checks" hidden>Mine has: '+['Claim','Evidence','Explain','Link'].map(function(c){return '<label><input type="checkbox" value="'+c+'">'+c+'</label>'}).join('')+'</div>');
+ var t=r.querySelector('textarea');t.value=S['w'+i]||'';t.oninput=function(){S['w'+i]=t.value;sv()};
+ r.querySelectorAll('.checks input').forEach(function(c){c.checked=!!(S['c'+i]||{})[c.value];c.onchange=function(){(S['c'+i]=S['c'+i]||{})[c.value]=c.checked;sv()}})});
+var miss=[];
+function grade(){var n=0;miss=[];
+ p1.querySelectorAll('.row').forEach(function(r,i){var s=r.querySelector('select'),f=r.querySelector('.fb'),a=D.P[i][1];
+  if(s.value===a){n++;s.className='ok';f.innerHTML='<b class="g">Right</b>'}else{s.className='no';f.innerHTML='<b class="r">'+(s.value?'Not quite.':'Blank.')+'</b> It\'s the '+a.toLowerCase()+'.';miss.push((i+1)+'. plot: '+D.P[i][0]+' Picked: '+(s.value||'blank')+'. Answer: '+a)}});
+ p2.querySelectorAll('.row').forEach(function(r,i){var it=D.M[i],c=r.querySelector('input:checked'),f=r.querySelector('.fb'),L=r.querySelectorAll('label');
+  L.forEach(function(l){l.className=''});L[it[2]].className='ok';
+  if(c&&+c.value===it[2]){n++;f.innerHTML='<b class="g">Right</b>'}else{if(c)L[+c.value].className='no';f.innerHTML='<b class="r">'+(c?'Not quite.':'Blank.')+'</b> '+it[1][it[2]];miss.push((i+10)+'. '+it[3]+': '+it[0]+' Picked: '+(c?it[1][+c.value]:'blank')+'. Answer: '+it[1][it[2]])}});
+ p3.querySelectorAll('.model,.checks').forEach(function(x){x.hidden=false});
+ var tot=D.P.length+D.M.length;document.getElementById('sc').textContent=n+' of '+tot+' on parts 1 and 2';
+ document.getElementById('sc2').textContent=n===tot?'Perfect. Check your written answers against the models.':(tot-n)+' to fix. The right answers are marked in green above.';
+ document.getElementById('after').hidden=false;S.graded=1;sv();}
+document.getElementById('go').onclick=function(){grade();document.getElementById('after').scrollIntoView({behavior:'smooth'})};
+document.getElementById('rs').onclick=function(){S={};sv();location.reload()};
+if(S.graded)grade();
+if(0)(function(){
+ var t='English diagnostic results\n'+document.getElementById('sc').textContent+'\n\nMissed:\n'+(miss.join('\n')||'none')+'\n\nWritten answers:\n'+D.W.map(function(w,i){var c=S['c'+i]||{},h=['Claim','Evidence','Explain','Link'].filter(function(k){return c[k]});return (i+22)+'. '+w[0]+'\nAnswer: '+((S['w'+i]||'').trim()||'(blank)')+'\nSelf check, has: '+(h.join(', ')||'none')}).join('\n\n');
+ var o=document.getElementById('out'),m=document.getElementById('cpm');o.value=t;
+ function fb(){o.hidden=false;o.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}m.innerHTML=ok?'<b class="g">Copied.</b>':'Select the text below and copy it.'}
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){m.innerHTML='<b class="g">Copied.</b>'},fb);else fb()};
+})();
+</script></body></html>
