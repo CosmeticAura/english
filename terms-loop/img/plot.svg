@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" font-family="-apple-system,Helvetica Neue,Arial,sans-serif">
+<rect width="900" height="540" fill="#fff"/>
+<polygon points="30,470 210,470 450,120 690,470 870,470 870,480 30,480" fill="#f2f6ff"/>
+<polyline points="30,470 210,470 450,120 690,470 870,470" fill="none" stroke="#1d1d1f" stroke-width="4" stroke-linejoin="round"/>
+<text x="30" y="38" font-size="15" fill="#6e6e73">Acronym</text>
+<text x="30" y="62" font-size="18" font-weight="700" fill="#0a3fae">Every Influencer Records Content,</text>
+<text x="30" y="86" font-size="18" font-weight="700" fill="#0a3fae">Can't Resist Filming Random Drama</text>
+<g fill="#007aff"><circle cx="70" cy="470" r="8"/><circle cx="210" cy="470" r="8"/><circle cx="294" cy="347" r="8"/><circle cx="378" cy="225" r="8"/></g>
+<circle cx="450" cy="120" r="11" fill="#ff3b30"/>
+<g fill="#34c759"><circle cx="510" cy="208" r="8"/><circle cx="594" cy="330" r="8"/><circle cx="690" cy="470" r="8"/><circle cx="800" cy="470" r="8"/></g>
+<g font-size="17" font-weight="700" fill="#0a3fae">
+<text x="30" y="505">1 Exposition</text>
+<text x="196" y="430" text-anchor="end">2 Inciting incident</text>
+<text x="280" y="342" text-anchor="end">3 Rising action</text>
+<text x="364" y="220" text-anchor="end">4 Complication</text></g>
+<g font-size="14" fill="#3a3a3c">
+<text x="30" y="525">the tour to Konarak starts</text>
+<text x="196" y="450" text-anchor="end">"But so romantic"</text>
+<text x="280" y="362" text-anchor="end">his address, letter daydream</text>
+<text x="364" y="240" text-anchor="end">her secret about Bobby</text></g>
+<text x="450" y="100" font-size="19" font-weight="700" fill="#c4001a" text-anchor="middle">5 Climax</text>
+<text x="450" y="146" font-size="14" fill="#c4001a" text-anchor="middle" dy="0"> </text>
+<text x="604" y="128" font-size="14" fill="#3a3a3c">"Is it really pain you feel,</text>
+<text x="604" y="146" font-size="14" fill="#3a3a3c">Mrs. Das, or is it guilt?"</text>
+<line x1="462" y1="120" x2="598" y2="128" stroke="#c4001a" stroke-width="1.5" stroke-dasharray="4 3"/>
+<g font-size="17" font-weight="700" fill="#127a35">
+<text x="526" y="203">6 Reversal</text>
+<text x="610" y="325">7 Falling action</text>
+<text x="700" y="438">8 Resolution</text>
+<text x="870" y="505" text-anchor="end">9 Denouement</text></g>
+<g font-size="14" fill="#3a3a3c">
+<text x="526" y="223">monkeys follow the puffed rice</text>
+<text x="610" y="345">Bobby attacked, then rescued</text>
+<text x="700" y="456">back to the hotel</text>
+<text x="870" y="525" text-anchor="end">his address slip blows away</text></g>
+<text x="300" y="440" font-size="13" fill="#007aff" transform="rotate(-55 300 440)">his hope grows</text>
+<text x="560" y="400" font-size="13" fill="#34a853" transform="rotate(55 560 400)">hope falls apart</text>
+</svg>
