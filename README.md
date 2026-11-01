@@ -1,0 +1,10 @@
+# Interpreter of Maladies study site
+
+Study loops for the Representations of Social Conflict quiz on "Interpreter of Maladies" by Jhumpa Lahiri: the characters, what happens in order, setting and cultural identity, symbols, themes, the key quotes and how to answer a written question.
+
+Live site: https://cosmeticaura.github.io/english/
+
+- `story/` runs each section as a loop: read and take Cornell notes, a 5 minute break, flashcards, another break, a brain dump, then mark what you missed. `?s=quotes` opens a section directly.
+- `practice/` lets you pick 2 likely questions, answer them in 20 minutes, check each answer for claim, quote, explanation and link, then compare with a model outline.
+
+Progress saves in your browser only. The deck lives in `deck.json`; rebuild with the studynow kit: `python3 build.py course.py OUT`.

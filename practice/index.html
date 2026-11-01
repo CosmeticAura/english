@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Written practice, Interpreter of Maladies</title>
+<meta name="description" content="Answer two likely quiz questions on Interpreter of Maladies on the clock, check each answer, then compare with a model outline.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("studynow:appearance")||"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
+<link rel="stylesheet" href="../practice.css">
+</head>
+<body>
+<div class="bar"><div class="in"><a href="../">&lsaquo; English</a><span class="t">Written practice</span><span class="sp"></span><span class="clock" id="clock">20:00</span></div></div>
+<main>
+<header><h1>Written practice</h1><p class="lede">The quiz is two written questions on the story. Pick two below, answer them in 20 minutes with the book closed, then check each one. Your answers save on this device.</p></header>
+
+<section class="card">
+  <div class="row"><h2>1. Pick 2 questions</h2><span class="sp"></span><span class="meta" id="pickCount">0 of 2 picked</span></div>
+  <div class="picks" id="picks"></div>
+</section>
+
+<section class="card" id="writeCard" hidden>
+  <div class="row"><h2>2. Answer them</h2><span class="sp"></span>
+    <button class="b pri" id="startBtn">Start 20 minutes</button><button class="b" id="pauseBtn" hidden>Pause</button></div>
+  <p class="meta">For each one: claim, exact quote, what it shows, and the link to a theme or the title.</p>
+  <div id="answers"></div>
+  <div class="row"><span class="sp"></span><button class="b" id="doneBtn">Done, check my answers</button></div>
+  <div class="confirm" id="doneConfirm" hidden><span>Stop the clock and check your answers now?</span><span class="sp"></span><button class="b quiet" id="doneNo">Keep writing</button><button class="b pri" id="doneYes">Check them</button></div>
+</section>
+
+<section class="card" id="checkCard" hidden>
+  <h2>3. Check each answer</h2>
+  <div id="checks"></div>
+  <div class="row"><span class="score" id="score">0 of 8</span><span class="sp"></span><span class="meta" id="verdict"></span></div>
+</section>
+
+<section class="card">
+  <div class="row"><span class="meta">Start over clears both answers, the clock and your checks.</span><span class="sp"></span><button class="b quiet" id="resetBtn">Start over</button></div>
+  <div class="confirm" id="resetConfirm" hidden><span>Clear your answers for good?</span><span class="sp"></span><button class="b quiet" id="resetNo">Keep them</button><button class="b pri" id="resetYes">Clear them</button></div>
+</section>
+</main>
+<script>
+(function(){
+"use strict";
+var Q=[
+ {id:"title",q:"How does the title \"Interpreter of Maladies\" connect to the story?",m:[
+  "Claim: the title is ironic. Kapasi interprets physical maladies for a doctor, but he can't interpret the emotional one Mrs. Das brings him.",
+  "Quote: \"I was hoping you could help me feel better, say the right thing. Suggest some kind of remedy.\"",
+  "Explain: she treats her secret like a symptom he can translate. All he manages is \"Is it really pain you feel, Mrs. Das, or is it guilt?\" and she walks away.",
+  "Link: miscommunication. Even a professional interpreter can't make two people understand each other."]},
+ {id:"kapasi",q:"How does Mr. Kapasi change over the course of the day?",m:[
+  "Claim: he goes from flattered and hopeful to disappointed and alone again.",
+  "Quote: Mrs. Das calls his job \"But so romantic\", which starts his fantasy of writing letters to her.",
+  "Quote: after the confession he knows \"he was not even important enough to be properly insulted\", and the address slip blows away.",
+  "Link: fantasy vs reality. He goes back to his silent marriage, keeping only \"the picture of the Das family\" in his mind."]},
+ {id:"secret",q:"What role does Mrs. Das's secret about Bobby play in the story?",m:[
+  "Claim: the secret is the turning point. It ends Kapasi's fantasy and shows how empty the Das marriage is.",
+  "Quote: \"He's not his... Raj's. He's not Raj's son.\"",
+  "Explain: she has kept it eight years and wants Kapasi to fix how \"terrible\" she feels, but she wants relief, not honesty.",
+  "Link: loneliness and guilt vs pain. Kapasi decides it is guilt, and she can't face that."]},
+ {id:"slip",q:"What does the slip of paper with Mr. Kapasi's address symbolize?",m:[
+  "Claim: the slip stands for Kapasi's hope of a real connection with Mrs. Das.",
+  "Quote: he imagines \"their friendship would grow, and flourish\" through letters about his work.",
+  "Explain: it flies out of her bag when she pulls out the hairbrush, and \"No one but Mr. Kapasi noticed.\" The connection was only ever in his head.",
+  "Link: fantasy vs reality, and miscommunication. The letters will never come."]},
+ {id:"identity",q:"How does the story show the Das family's cultural identity?",m:[
+  "Claim: the Das family look Indian but act like American tourists, caught between two cultures.",
+  "Quote: \"The family looked Indian but dressed as foreigners did.\" Mr. Das says \"Mina and I were both born in America.\"",
+  "Explain: Mr. Das reads a tour book about his parents' country, takes photos like a tourist, and shakes hands \"like an American\" while Kapasi presses his palms together.",
+  "Link: cultural identity. Kapasi is the outsider who interprets India for them, even though they share a heritage."]},
+ {id:"miscomm",q:"How does the story show miscommunication between characters?",m:[
+  "Claim: almost every relationship in the story fails because people don't listen to or understand each other.",
+  "Quote: \"But we do not face a language barrier. What need is there for an interpreter?\"",
+  "Explain: Kapasi takes \"romantic\" as interest in him; Mrs. Das wants a remedy, not a question; the Das parents bicker and ignore the kids.",
+  "Link: the title. The interpreter can translate words but not feelings."]}];
+var CHECKS=[["Claim","Answers the question in one sentence"],["Quote","Exact words from the story"],["Explain","Says what the quote shows"],["Link","Ties it to a theme or the title"]];
+var MIN=20,K="eng:practice",S=load(),tick=null;
+function blank(){return {picked:[],ans:{},left:MIN*60000,running:false,endAt:0,done:false,checks:{}}}
+function load(){try{var v=JSON.parse(localStorage.getItem(K));if(v&&v.picked)return v}catch(e){}return blank()}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+var $=function(id){return document.getElementById(id)};
+function fmt(ms){ms=Math.max(0,Math.round(ms/1000));return Math.floor(ms/60)+":"+String(ms%60).padStart(2,"0")}
+function remaining(){return S.running?Math.max(0,S.endAt-Date.now()):S.left}
+function q(id){return Q.find(function(x){return x.id===id})}
+function renderPicks(){
+  $("picks").innerHTML="";
+  Q.forEach(function(x){
+    var on=S.picked.indexOf(x.id)>=0,b=document.createElement("button");b.type="button";b.className="pick";b.setAttribute("aria-pressed",String(on));
+    b.innerHTML='<span class="dot"></span><span class="tx"></span>';b.querySelector(".tx").textContent=x.q;
+    b.disabled=S.done||(!on&&S.picked.length>=2);
+    b.onclick=function(){if(on)S.picked=S.picked.filter(function(p){return p!==x.id});else if(S.picked.length<2)S.picked.push(x.id);save();render()};
+    $("picks").appendChild(b);
+  });
+  $("pickCount").textContent=S.picked.length+" of 2 picked";
+}
+function renderAnswers(){
+  var box=$("answers");box.innerHTML="";
+  S.picked.forEach(function(id,i){
+    var p=document.createElement("p");p.className="prompt";p.textContent=(i+1)+". "+q(id).q;
+    var t=document.createElement("textarea");t.className="write short";t.setAttribute("aria-label","Answer "+(i+1));t.value=S.ans[id]||"";t.readOnly=S.done;
+    t.addEventListener("input",function(){S.ans[id]=t.value;save()});
+    box.appendChild(p);box.appendChild(t);
+  });
+}
+function renderChecks(){
+  var box=$("checks");box.innerHTML="";var n=0;
+  S.picked.forEach(function(id,i){
+    var h=document.createElement("p");h.className="prompt";h.textContent=(i+1)+". "+q(id).q;box.appendChild(h);
+    var ul=document.createElement("ul");ul.className="checks";
+    CHECKS.forEach(function(c,j){
+      var key=id+":"+j,on=!!S.checks[key];if(on)n++;
+      var li=document.createElement("li"),b=document.createElement("button");b.type="button";b.className="check";b.setAttribute("aria-pressed",String(on));
+      b.innerHTML='<span class="box"></span><span><span class="lbl"></span><span class="why"></span></span>';
+      b.querySelector(".lbl").textContent=c[0];b.querySelector(".why").textContent=c[1];
+      b.onclick=function(){S.checks[key]=!S.checks[key];save();renderChecks()};
+      li.appendChild(b);ul.appendChild(li);
+    });
+    box.appendChild(ul);
+    var m=document.createElement("div");m.className="model";m.innerHTML='<span class="meta">Model outline</span><ul></ul>';
+    q(id).m.forEach(function(line){var li=document.createElement("li");li.textContent=line;m.querySelector("ul").appendChild(li)});
+    box.appendChild(m);
+  });
+  var total=S.picked.length*4;$("score").textContent=n+" of "+total;
+  $("verdict").textContent=n===total?"Both answers hit all four steps":"Rewrite the steps you missed using the model outline";
+}
+function renderClock(){var r=remaining();$("clock").textContent=fmt(r);$("clock").classList.toggle("low",r<=3*60000);if(S.running&&r<=0){S.running=false;S.left=0;finish()}}
+function render(){
+  renderPicks();var ready=S.picked.length===2;$("writeCard").hidden=!ready;
+  if(ready)renderAnswers();
+  $("startBtn").hidden=S.running||S.done||S.left<=0;$("startBtn").textContent=S.left<MIN*60000?"Resume":"Start 20 minutes";
+  $("pauseBtn").hidden=!S.running;$("doneBtn").disabled=S.done||!ready;
+  $("checkCard").hidden=!S.done;if(S.done)renderChecks();
+  renderClock();clearInterval(tick);if(S.running)tick=setInterval(renderClock,500);
+}
+function finish(){if(S.running){S.left=remaining();S.running=false}S.done=true;save();render();$("checkCard").scrollIntoView({behavior:"smooth",block:"start"})}
+$("startBtn").onclick=function(){S.running=true;S.endAt=Date.now()+S.left;save();render();var t=document.querySelector("#answers textarea");if(t)t.focus()};
+$("pauseBtn").onclick=function(){S.left=remaining();S.running=false;save();render()};
+$("doneBtn").onclick=function(){$("doneConfirm").hidden=false};
+$("doneNo").onclick=function(){$("doneConfirm").hidden=true};
+$("doneYes").onclick=function(){$("doneConfirm").hidden=true;finish()};
+$("resetBtn").onclick=function(){$("resetConfirm").hidden=false};
+$("resetNo").onclick=function(){$("resetConfirm").hidden=true};
+$("resetYes").onclick=function(){S=blank();save();$("resetConfirm").hidden=true;render()};
+document.addEventListener("visibilitychange",function(){if(!document.hidden)renderClock()});
+render();
+})();
+</script>
+</body>
+</html>
