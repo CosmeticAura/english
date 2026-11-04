@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<rect width="960" height="460" fill="#fff"/>
+<text x="24" y="38" font-size="22" font-weight="700" fill="#000">Any word fits one of three big ideas</text>
+<text x="24" y="62" font-size="14" fill="#555">Find the word's group first. The group tells you which theme to write about.</text>
+<g font-size="14">
+<rect x="24" y="90" width="292" height="350" rx="14" fill="#f2f2f7"/>
+<text x="44" y="122" font-size="17" font-weight="700" fill="#007aff">Light and dark</text>
+<text x="44" y="146" fill="#333">Theme: honesty is only</text><text x="44" y="164" fill="#333">possible when they can't</text><text x="44" y="182" fill="#333">see each other</text>
+<text x="44" y="218" font-weight="600">dark, darkness, candle,</text><text x="44" y="238" font-weight="600">candlelight, light, lamp,</text><text x="44" y="258" font-weight="600">electricity, power,</text><text x="44" y="278" font-weight="600">notice, temporary, hour,</text><text x="44" y="298" font-weight="600">window, reflection</text>
+<rect x="334" y="90" width="292" height="350" rx="14" fill="#f2f2f7"/>
+<text x="354" y="122" font-size="17" font-weight="700" fill="#007aff">Home and food</text>
+<text x="354" y="146" fill="#333">Theme: the home was built</text><text x="354" y="164" fill="#333">for a future family that</text><text x="354" y="182" fill="#333">never came</text>
+<text x="354" y="218" font-weight="600">food, cooking, pantry,</text><text x="354" y="238" font-weight="600">freezer, lamb, recipe,</text><text x="354" y="258" font-weight="600">nursery, room, crib,</text><text x="354" y="278" font-weight="600">house, toothbrush,</text><text x="354" y="298" font-weight="600">sweater, gift, photograph</text>
+<rect x="644" y="90" width="292" height="350" rx="14" fill="#f2f2f7"/>
+<text x="664" y="122" font-size="17" font-weight="700" fill="#007aff">Secrets and the end</text>
+<text x="664" y="146" fill="#333">Theme: knowing the truth</text><text x="664" y="164" fill="#333">can bring people together</text><text x="664" y="182" fill="#333">and break them apart</text>
+<text x="664" y="218" font-weight="600">secret, confession, game,</text><text x="664" y="238" font-weight="600">tell, baby, boy, held,</text><text x="664" y="258" font-weight="600">surprise, apartment,</text><text x="664" y="278" font-weight="600">wept, cried, knew,</text><text x="664" y="298" font-weight="600">Baltimore, magazine</text>
+</g>
+<text x="24" y="430" font-size="1" fill="#fff">.</text>
+</svg>

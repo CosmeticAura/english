@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<rect width="960" height="400" fill="#fff"/>
+<text x="24" y="38" font-size="22" font-weight="700" fill="#000">CLIMB: how to answer any word</text>
+<text x="24" y="62" font-size="14" fill="#555">Each step is one or two sentences. Go up the stairs in order.</text>
+<g font-size="14">
+<rect x="24" y="300" width="170" height="76" rx="10" fill="#e5f0ff"/><text x="40" y="328" font-size="26" font-weight="800" fill="#007aff">C</text><text x="70" y="328" font-weight="700">Context</text><text x="40" y="356" fill="#333">Who, when, what night</text>
+<rect x="210" y="240" width="170" height="136" rx="10" fill="#e5f0ff"/><text x="226" y="268" font-size="26" font-weight="800" fill="#007aff">L</text><text x="252" y="268" font-weight="700">Literal</text><text x="226" y="296" fill="#333">What the word</text><text x="226" y="314" fill="#333">means right there</text>
+<rect x="396" y="180" width="170" height="196" rx="10" fill="#e5f0ff"/><text x="412" y="208" font-size="26" font-weight="800" fill="#007aff">I</text><text x="434" y="208" font-weight="700">Imagery</text><text x="412" y="236" fill="#333">What you see, feel,</text><text x="412" y="254" fill="#333">hear. What it</text><text x="412" y="272" fill="#333">suggests (mood)</text>
+<rect x="582" y="120" width="170" height="256" rx="10" fill="#cfe2ff"/><text x="598" y="148" font-size="26" font-weight="800" fill="#007aff">M</text><text x="630" y="148" font-weight="700">Meaning</text><text x="598" y="176" fill="#333">The theme it builds:</text><text x="598" y="194" fill="#333">grief, secrets,</text><text x="598" y="212" fill="#333">closeness vs distance,</text><text x="598" y="230" fill="#333">temporary vs forever</text><text x="598" y="258" fill="#333" font-weight="700">This is the WHY</text>
+<rect x="768" y="60" width="170" height="316" rx="10" fill="#007aff"/><text x="784" y="88" font-size="26" font-weight="800" fill="#fff">B</text><text x="810" y="88" font-weight="700" fill="#fff">Bigger picture</text><text x="784" y="116" fill="#fff">Where else it shows up,</text><text x="784" y="134" fill="#fff">how it changes, and</text><text x="784" y="152" fill="#fff">how it links to the</text><text x="784" y="170" fill="#fff">ending (night 5)</text><text x="784" y="198" fill="#fff" font-weight="700">This is the HOW</text><text x="784" y="216" fill="#fff">(symbol, contrast,</text><text x="784" y="234" fill="#fff">irony, foreshadowing)</text>
+</g>
+</svg>
