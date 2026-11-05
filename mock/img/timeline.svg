@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="-apple-system,Helvetica,Arial,sans-serif">
+<rect width="960" height="520" fill="#fff"/>
+<text x="24" y="38" font-size="22" font-weight="700" fill="#000">A Temporary Matter: five nights in the dark</text>
+<text x="24" y="62" font-size="14" fill="#555">Six months after the baby is stillborn. The power goes out at 8 pm for an hour, five nights in a row.</text>
+<line x1="60" y1="130" x2="900" y2="130" stroke="#c7c7cc" stroke-width="3"/>
+<g font-size="13" fill="#000">
+<!-- night nodes -->
+<g><circle cx="110" cy="130" r="20" fill="#007aff"/><text x="110" y="135" text-anchor="middle" fill="#fff" font-weight="700">1</text>
+<text x="110" y="175" text-anchor="middle" font-weight="700">Candles from his</text><text x="110" y="191" text-anchor="middle" font-weight="700">birthday party</text>
+<text x="110" y="220" text-anchor="middle">Game from Shoba's</text><text x="110" y="236" text-anchor="middle">grandmother in India</text>
+<text x="110" y="266" text-anchor="middle" fill="#007aff">She: read his</text><text x="110" y="282" text-anchor="middle" fill="#007aff">address book</text>
+<text x="110" y="306" text-anchor="middle" fill="#007aff">He: forgot to tip the</text><text x="110" y="322" text-anchor="middle" fill="#007aff">waiter, went back</text></g>
+<g><circle cx="290" cy="130" r="20" fill="#007aff"/><text x="290" y="135" text-anchor="middle" fill="#fff" font-weight="700">2</text>
+<text x="290" y="175" text-anchor="middle" font-weight="700">Their reflection</text><text x="290" y="191" text-anchor="middle" font-weight="700">in the window</text>
+<text x="290" y="220" text-anchor="middle">Porch, neighbors walk</text><text x="290" y="236" text-anchor="middle">to the lit bookstore</text>
+<text x="290" y="266" text-anchor="middle" fill="#007aff">She: went out when</text><text x="290" y="282" text-anchor="middle" fill="#007aff">his mother visited</text>
+<text x="290" y="306" text-anchor="middle" fill="#007aff">He: cheated on a test</text><text x="290" y="322" text-anchor="middle" fill="#007aff">after his father died</text></g>
+<g><circle cx="470" cy="130" r="20" fill="#007aff"/><text x="470" y="135" text-anchor="middle" fill="#fff" font-weight="700">3</text>
+<text x="470" y="175" text-anchor="middle" font-weight="700">They kiss</text>
+<text x="470" y="266" text-anchor="middle" fill="#007aff">He: returned the</text><text x="470" y="282" text-anchor="middle" fill="#007aff">sweater vest she gave</text>
+<text x="470" y="306" text-anchor="middle" fill="#007aff">She: let him talk to his</text><text x="470" y="322" text-anchor="middle" fill="#007aff">boss with pâté on his face</text></g>
+<g><circle cx="650" cy="130" r="20" fill="#007aff"/><text x="650" y="135" text-anchor="middle" fill="#fff" font-weight="700">4</text>
+<text x="650" y="175" text-anchor="middle" font-weight="700">They make love</text>
+<text x="650" y="266" text-anchor="middle" fill="#007aff">He: kept a magazine</text><text x="650" y="282" text-anchor="middle" fill="#007aff">picture of a woman</text>
+<text x="650" y="306" text-anchor="middle" fill="#007aff">She: never liked his</text><text x="650" y="322" text-anchor="middle" fill="#007aff">published poem</text></g>
+<g><circle cx="840" cy="130" r="22" fill="#000"/><text x="840" y="135" text-anchor="middle" fill="#fff" font-weight="700">5</text>
+<text x="840" y="175" text-anchor="middle" font-weight="700">Power fixed early</text>
+<text x="840" y="200" text-anchor="middle">Candles anyway</text>
+<text x="840" y="236" text-anchor="middle" font-weight="700">She turns the</text><text x="840" y="252" text-anchor="middle" font-weight="700">lights ON:</text>
+<text x="840" y="270" text-anchor="middle">"I found an apartment"</text>
+<text x="840" y="300" text-anchor="middle" font-weight="700">He: the baby was</text><text x="840" y="316" text-anchor="middle" font-weight="700">a boy. He held him.</text>
+<text x="840" y="346" text-anchor="middle">She turns the light OFF.</text><text x="840" y="362" text-anchor="middle">They cry together.</text></g>
+</g>
+<rect x="24" y="400" width="912" height="96" rx="12" fill="#f2f2f7"/>
+<text x="44" y="430" font-size="15" font-weight="700" fill="#000">The shape to remember</text>
+<text x="44" y="456" font-size="14" fill="#333">Nights 1 to 4: the confessions get bigger and more painful, and the couple gets closer (kiss, then sex).</text>
+<text x="44" y="480" font-size="14" fill="#333">Night 5 flips it. The light comes back, and the two biggest secrets end the marriage. Darkness was the only place they could share.</text>
+</svg>
